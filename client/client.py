@@ -4,9 +4,8 @@ import ship
 import select
 from threading import Thread
 import time
+import config
 
-WINDOW_WIDTH = 700
-WINDOW_HEIGHT = 514
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
@@ -16,8 +15,6 @@ REFRESH_RATE = 60
 LEFT = 1
 SCROLL = 2
 RIGHT = 3
-IP = '127.0.0.1'
-PORT = 8820
 CHARS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
          'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'space']
 USERNAME = ''
@@ -337,13 +334,12 @@ def my_turn(screen):
 def main_game():
     """Function that create the main menu"""
     pygame.init()
-    size = (WINDOW_WIDTH, WINDOW_HEIGHT)
+    size = (config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Game")
     img = pygame.image.load('main.jpg')
     screen.blit(img, (0, 0))
     pygame.display.flip()
-    clock = pygame.time.Clock()
     mouse_pos_list = []
     pygame.display.flip()
     finish = False
@@ -380,7 +376,7 @@ def connect_to_server():
             return 0
     print 'connecting to server...'
     client_socket = socket.socket()
-    client_socket.connect((IP, PORT))
+    client_socket.connect((config.SERVER_IP, config.SERVER_PORT))
     while FINISH_GAME is False:
         rlist, wlist, xlist = select.select([client_socket], [client_socket], [])
         if SEND_POSITIONS is True:
@@ -390,7 +386,7 @@ def connect_to_server():
             str_positions = str_positions.replace(')', '')
             str_positions = str_positions.replace(' ', '')
             client_socket = socket.socket()
-            client_socket.connect((IP, PORT))
+            client_socket.connect((config.SERVER_IP, config.SERVER_PORT))
             client_socket.send(str_positions + '$' + USERNAME)
             SEND_POSITIONS = False
             FINISH_PUT_SHIPS = True

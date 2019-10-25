@@ -2,8 +2,8 @@ import socket
 import select
 import random
 
-IP = '0.0.0.0'
-PORT = 8820
+import config
+
 messages_to_send = []
 clients_ready_to_play = []
 
@@ -29,7 +29,7 @@ def handle_positions_of_ships(data):
     return list_of_positions, username
 
 
-def game(list_players, server_socket):
+def game(list_players):
     """The function manages a game between two players"""
     first_turn = random.randint(0, 1)
     if first_turn == 0:
@@ -98,7 +98,7 @@ def game(list_players, server_socket):
 
 def main():
     server_socket = socket.socket()
-    server_socket.bind((IP, PORT))
+    server_socket.bind((config.IP, config.PORT))
     server_socket.listen(5)
     open_client_sockets = []
     while True:
@@ -120,7 +120,6 @@ def main():
                     if len(clients_ready_to_play) == 2:
                         game(clients_ready_to_play, server_socket)
                         clients_ready_to_play = []
-        #send_waiting_messages(wlist)
 
 
 if __name__ == '__main__':
