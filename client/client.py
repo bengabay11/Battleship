@@ -36,7 +36,7 @@ GAMES = 0
 
 def score(screen):
     """The function presents the score of the player"""
-    img = pygame.image.load('base.jpg')
+    img = pygame.image.load(config.BASE_IMGAE)
     screen.blit(img, (0, 0))
     pygame.display.flip()
     finish = False
@@ -49,7 +49,7 @@ def score(screen):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
                 (width, height) = pygame.mouse.get_pos()
                 if 16 < height < 73 and 21 < width < 77:
-                    img = pygame.image.load('main.jpg')
+                    img = pygame.image.load(config.MAIN_IMAGE)
                     screen.blit(img, (0, 0))
                     pygame.display.flip()
                     finish = True
@@ -58,7 +58,7 @@ def score(screen):
 
 def instructions(screen):
     """The function print image of instructions on the screen"""
-    img = pygame.image.load('instructions.jpg')
+    img = pygame.image.load(config.INSTRUCTIONS_IMAGE)
     screen.blit(img, (0, 0))
     pygame.display.flip()
     finish = False
@@ -67,7 +67,7 @@ def instructions(screen):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
                 (width, height) = pygame.mouse.get_pos()
                 if 16 < height < 73 and 21 < width < 77:
-                    img = pygame.image.load('main.jpg')
+                    img = pygame.image.load(config.MAIN_IMAGE)
                     screen.blit(img, (0, 0))
                     pygame.display.flip()
                     finish = True
@@ -107,7 +107,7 @@ def get_text(screen):
                 mouse_pos_list.append(pygame.mouse.get_pos())
                 (width, height) = pygame.mouse.get_pos()
                 if 16 < height < 73 and 21 < width < 77:
-                    img = pygame.image.load('main.jpg')
+                    img = pygame.image.load(config.MAIN_IMAGE)
                     screen.blit(img, (0, 0))
                     pygame.display.flip()
                     finish = True
@@ -117,7 +117,7 @@ def get_text(screen):
 
 def get_username(screen):
     """The function gets username from the client by using the function get_text()"""
-    img = pygame.image.load('base.jpg')
+    img = pygame.image.load(config.BASE_IMGAE)
     screen.blit(img, (0, 0))
     text1 = pygame.font.SysFont("monospace", 30)
     label = text1.render("Enter username: ", 1, WHITE)
@@ -149,7 +149,7 @@ def placed_ship(width, height):
 
 def create_board(screen):
     """The function draw two boards, and the client put the ships on it"""
-    img = pygame.image.load('base.jpg')
+    img = pygame.image.load(config.BASE_IMGAE)
     screen.blit(img, (0, 0))
     for i in xrange(11):
         pygame.draw.line(screen, WHITE, [30 * i + 30, 170], [30 * i + 30, 470], 4)
@@ -187,7 +187,7 @@ def create_board(screen):
                         screen.blit(ship1.image, ship1.get_pos())
                         pygame.display.flip()
                 if 16 < height < 73 and 21 < width < 77:
-                    img = pygame.image.load('main.jpg')
+                    img = pygame.image.load(config.MAIN_IMAGE)
                     screen.blit(img, (0, 0))
                     pygame.display.flip()
                     finish = True
@@ -203,7 +203,7 @@ def create_board(screen):
                 ok = True
             if USERNAME2 != '':
                 my_turn(screen)
-                img = pygame.image.load('main.jpg')
+                img = pygame.image.load(config.MAIN_IMAGE)
                 screen.blit(img, (0, 0))
                 pygame.display.flip()
                 finish = True
@@ -336,8 +336,8 @@ def main_game():
     pygame.init()
     size = (config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
     screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("Game")
-    img = pygame.image.load('main.jpg')
+    pygame.display.set_caption(config.GAME_CAPTION)
+    img = pygame.image.load(config.MAIN_IMAGE)
     screen.blit(img, (0, 0))
     pygame.display.flip()
     mouse_pos_list = []
